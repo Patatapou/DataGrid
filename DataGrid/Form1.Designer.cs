@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new TableLayoutPanel();
-            dgvDatos = new DataGridView();
-            btnCargar = new Button();
+            btn = new Button();
+            label1 = new Label();
+            CURP = new TextBox();
             openFileDialog1 = new OpenFileDialog();
             tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvDatos).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -41,43 +41,47 @@
             tableLayoutPanel1.BackColor = SystemColors.GrayText;
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Controls.Add(dgvDatos, 0, 0);
-            tableLayoutPanel1.Controls.Add(btnCargar, 0, 1);
+            tableLayoutPanel1.Controls.Add(btn, 0, 2);
+            tableLayoutPanel1.Controls.Add(label1, 0, 0);
+            tableLayoutPanel1.Controls.Add(CURP, 0, 1);
             tableLayoutPanel1.Location = new Point(2, 7);
             tableLayoutPanel1.Margin = new Padding(2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 86.1167F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 13.8833F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 78.37838F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 21.6216221F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 419F));
             tableLayoutPanel1.Size = new Size(927, 457);
             tableLayoutPanel1.TabIndex = 2;
             // 
-            // dgvDatos
+            // btn
             // 
-            dgvDatos.BackgroundColor = SystemColors.GradientInactiveCaption;
-            dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDatos.Dock = DockStyle.Fill;
-            dgvDatos.GridColor = SystemColors.InactiveCaptionText;
-            dgvDatos.Location = new Point(2, 2);
-            dgvDatos.Margin = new Padding(2);
-            dgvDatos.Name = "dgvDatos";
-            dgvDatos.RowHeadersWidth = 62;
-            dgvDatos.Size = new Size(923, 389);
-            dgvDatos.TabIndex = 0;
+            btn.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btn.Font = new Font("Arial Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn.Location = new Point(2, 217);
+            btn.Margin = new Padding(2);
+            btn.Name = "btn";
+            btn.Size = new Size(923, 60);
+            btn.TabIndex = 1;
+            btn.Text = "Verificar";
+            btn.UseVisualStyleBackColor = true;
+            btn.Click += btn_Click;
             // 
-            // btnCargar
+            // label1
             // 
-            btnCargar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            btnCargar.Font = new Font("Arial Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCargar.Location = new Point(365, 395);
-            btnCargar.Margin = new Padding(2);
-            btnCargar.Name = "btnCargar";
-            btnCargar.Size = new Size(197, 60);
-            btnCargar.TabIndex = 1;
-            btnCargar.Text = "CARGAR";
-            btnCargar.UseVisualStyleBackColor = true;
-            btnCargar.Click += btnCargar_Click;
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(115, 20);
+            label1.TabIndex = 2;
+            label1.Text = "Ingrese su CURP";
+            // 
+            // CURP
+            // 
+            CURP.Location = new Point(3, 32);
+            CURP.Name = "CURP";
+            CURP.Size = new Size(405, 27);
+            CURP.TabIndex = 3;
             // 
             // openFileDialog1
             // 
@@ -94,15 +98,16 @@
             Name = "Form1";
             Text = "Form1";
             tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvDatos).EndInit();
+            tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
         private TableLayoutPanel tableLayoutPanel1;
-        private DataGridView dgvDatos;
         private OpenFileDialog openFileDialog1;
-        private Button btnCargar;
+        private Button btn;
+        private Label label1;
+        private TextBox CURP;
     }
 }

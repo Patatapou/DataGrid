@@ -1,48 +1,41 @@
+using System.Text.RegularExpressions;
+
 namespace DataGrid
 {
     public partial class Form1 : Form
     {
-        string filePath = "";
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void btnCargar_Click(object sender, EventArgs e)
+        private void btn_Click(object sender, EventArgs e)
         {
-            DialogResult resultado;
-            resultado = openFileDialog1.ShowDialog();
-            if (resultado == DialogResult.OK)
+            string curp = CURP.Text;
+            string expresion = "^[A-Z]{4}\\d{6}[HM]{1}[A-Z]{2}[A-Z]{3}[0-9A-Z]{2}$";
+            /*
+            ^ - Indica el inicio de la cadena.
+            [A-Z]{4} - EAMM Cuatro letras mayúsculas (primeros cuatro caracteres de la CURP: iniciales del apellido y nombre).
+            \\d{6} - 050518 Seis dígitos numéricos (fecha de nacimiento en formato YYMMDD). \d es equivalente a [0-9].
+            [HM]{1} - H Una sola letra (H para Hombre, M para Mujer). {1} indica que debe aparecer exactamente una vez (puede omitirse porque es redundante).
+            [A-Z]{2} - DG Dos letras mayúsculas (código del estado de nacimiento, como DF o DG).
+            [A-Z]{3} - STG Tres letras mayúsculas (consonantes internas del apellido paterno, materno y nombre).
+            [0-9A-Z]{2} - A8 Dos caracteres alfanuméricos (dígito de siglo + dígito verificador). Puede ser un número (0-9) o una letra (A-Z).
+            $ - Indica el final de la cadena.
+            */
+            
+            if (Regex.IsMatch(curp,expresion)==true)
             {
-                filePath = openFileDialog1.FileName;
-                try
-                {
-                    string documento = File.ReadAllText(filePath);
+                string year = curp[4].ToString() + curp[5].ToString();
+                string mes = curp[6].ToString() + curp[7].ToString();
+                string dia = curp[8].ToString() + curp[9].ToString();
+                DateTime fecha = DateTime.Parse(dia+"/"+mes+"/"+year);
 
-                    string[] fila = documento.Split('\n');
-                    string[] col = fila[0].Split(',');
-
-                    
-                    dgvDatos.ColumnCount = col.Length;
-                    dgvDatos.RowCount = fila.Length;
-                    for (int i = 0; i < col.Length; i++)
-                    {
-                        dgvDatos.Rows[0].Cells[i].Value = col[i];
-                    }
-                    for (int i = 1; i < (fila.Length) - 1; i++)
-                    {
-                        col = fila[i].Split(',');
-                        for (int j = 0; j < col.Length; j++)
-                        {
-                            dgvDatos.Rows[i].Cells[j].Value = col[j];
-                        }
-                    }
-                    MessageBox.Show(fila.Length-1+" registros cargados.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al abrir el archivo: " + ex.Message);
-                }
+                MessageBox.Show("La fecha de nacimiento es: " + fecha.ToString("dd/MM/yyyy"));
+            } 
+            else 
+            {
+                MessageBox.Show("Ingrese una CURP valida");
             }
         }
     }
